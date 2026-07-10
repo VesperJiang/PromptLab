@@ -35,3 +35,6 @@
 
 ## Conclusion
 The survey data confirms that PromptLab addresses real user needs. Most users struggle with writing Prompts, and the features we are building — especially auto-optimization and diagnosis — are exactly what they want.
+
+
+*This summary was written based on survey data collected by the author. AI assistance was used for formatting and language refinement.*
