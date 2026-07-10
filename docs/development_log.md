@@ -1,6 +1,6 @@
-Day 2
+## Day 2
 
-Member A - Shan Jiang
+## Member A - Shan Jiang
 
 - Improved the prompt scoring module.
 - Added dimension-based evaluation for clarity, role, task, context, constraints, output format, and executability.
