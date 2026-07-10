@@ -38,6 +38,8 @@ with tab1:
             result = score_prompt(user_prompt)
             problems = result["problems"]
             score = result["score"]
+            dimension_scores = result["dimension_scores"]
+            feedback = result["feedback"]
             optimized = optimize_prompt(user_prompt)
             explanations = explain_optimization()
 
@@ -46,6 +48,10 @@ with tab1:
             with col1:
                 st.subheader("Prompt Score")
                 st.metric("Score", f"{score}/100")
+                st.subheader("Dimension Scores")
+                for dimension, dimension_score in dimension_scores.items():
+                    st.write(f"**{dimension}**: {dimension_score}/100")
+                    st.progress(dimension_score / 100)
 
                 st.subheader("Diagnosis")
                 if problems:
