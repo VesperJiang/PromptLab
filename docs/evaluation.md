@@ -55,3 +55,44 @@ Despite the limitations, we believe PromptLab will make a real difference. The b
 
 ---
 *I wrote this evaluation based on our survey results and test data. I used AI tools to help with wording and structure.*
+
+## Real Case Comparison
+
+We tested one typical bad prompt to see how much PromptLab could improve it.
+
+### The Original Prompt
+
+> 帮我写一篇文章
+
+This is a real example of what we saw in our survey — users often write very short, vague prompts. This one has almost no useful information: no topic, no format, no length limit, and no role for the AI to play.
+
+### The Optimized Version
+
+After running it through PromptLab, we got this:
+
+> You are a university writing instructor.
+> 
+> Please write a Chinese argumentative essay on "The Impact of AI on College Students' Learning Habits."
+> 
+> Requirements:
+> 1. Approximately 800 words
+> 2. Structure: introduction, body, and conclusion
+> 3. Formal tone
+> 4. At least 3 key arguments
+> 5. Output in Markdown format
+
+### What Changed
+
+The optimized version added most of what the original was missing. We got a clear role ("university writing instructor"), a specific topic ("AI and college learning"), a structure requirement, and a Markdown output format. We also got word count and tone constraints.
+
+It's not perfect — the user still needs to confirm their topic and audience — but it's much more usable than just "write an article."
+
+### Score Comparison
+
+We scored both versions using our five criteria. The original scored low on almost everything because it didn't specify any details. The optimized version did much better, especially on role setting, output format, and constraints — exactly the areas where our survey showed users struggle the most.
+
+### What We Learned
+
+From this test, we can see that PromptLab works well for fixing vague prompts. It won't replace the user's own thinking, but it helps them think about what they actually need from the AI. The biggest improvements come from adding role, format, and constraints — which makes sense, since those were the top missing elements in our survey.
+
+*This comparison was written based on our own test results. AI assistance was used for translation and wording refinement.*
