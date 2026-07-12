@@ -5,7 +5,6 @@ from datetime import datetime
 # ==========================================
 # 0. Backend Integration
 # ==========================================
-# Precisely connect with the backend modules developed by the team leader
 from src.prompt_analyzer import diagnose_prompt, score_prompt
 from src.prompt_optimizer import optimize_prompt, explain_optimization
 
@@ -59,7 +58,36 @@ with tab1:
             # Valid input captured, confirming state migration
             st.success("Form submission captured successfully. Passing telemetry to the AI engine.")
             
-            # The visualization and refactoring codes for subsequent stages will be deployed here
+            # ==========================================
+            # 3. Third Stage: Score Visualization
+            # ==========================================
+            st.markdown("---")
+            
+            # score_prompt returns a dictionary containing "score" and "dimension_scores"
+            evaluation_result = score_prompt(user_prompt)
+            total_score = evaluation_result["score"]
+            metrics_dict = evaluation_result["dimension_scores"]
+
+            # Establish a dual-column layout: Left for primary score, Right for fine-grained dimensions
+            col_score, col_progress = st.columns([1, 2])
+
+            with col_score:
+                st.subheader("Overall Quality")
+                # Calculate the numerical gap to provide a benchmark for optimization
+                score_gap = total_score - 100
+                st.metric(
+                    label="Evaluation Score", 
+                    value=f"{total_score} / 100", 
+                    delta=f"{score_gap} pts below parity" if score_gap < 0 else "Optimal Quality"
+                )
+
+            with col_progress:
+                st.subheader("Dimension Metrics")
+                # Dynamic iteration through backend metrics (e.g., Clarity, Context, Constraints)
+                for metric_name, score_value in metrics_dict.items():
+                    st.write(f"**{metric_name}**: {score_value} / 100")
+                    # st.progress requires a float boundary between 0.0 and 1.0
+                    st.progress(score_value / 100)
 
 # ==========================================
 # 5. Tab 2 and Tab 3: Sandbox Placeholders
