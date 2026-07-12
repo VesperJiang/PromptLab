@@ -1,4 +1,4 @@
-Final release files for PromptLab.
+# Member D Deliverables for PromptLab.
 
 To generate the PDF report locally (requires `pandoc` and a LaTeX engine such as `xelatex`):
 
@@ -9,7 +9,7 @@ brew install pandoc
 # https://www.tug.org/mactex/
 
 # Convert markdown to PDF:
-pandoc docs/final_report.md -o release/final_report.pdf --pdf-engine=xelatex
+pandoc docs/final_report.md -o member_d_deliverables/final_report.pdf --pdf-engine=xelatex
 ```
 
 If you'd like, I can attempt alternative PDF generation methods here, but they may require additional system packages. If you want me to proceed, confirm and I'll try creating a simple PDF fallback.

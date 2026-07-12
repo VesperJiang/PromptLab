@@ -49,8 +49,8 @@
 - 输出：幻灯片文件（可用 PowerPoint/Google Slides）及演讲稿
 - 时长：2-3 天
 
-### 步骤 8 — 输出物与交付（完成指标：`/release/`）
-- 把关键文档、报告、幻灯片、市场单页放到 `/release` 目录
+### 步骤 8 — 输出物与交付（完成指标：`/member_d_deliverables/`）
+- 把关键文档、报告、幻灯片、市场单页放到 `/member_d_deliverables` 目录
 - 时长：1-2 天
 
 ---
