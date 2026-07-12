@@ -1,0 +1,6 @@
+## Technical Core
+
+The technical core of PromptLab contains three main modules: Prompt Lint, Prompt Score, and Prompt Optimizer.
+Prompt Lint checks whether the user prompt contains key elements, including task, role, context, output format, constraints, examples, and clarity.
+Prompt Score evaluates the prompt across several dimensions: clarity, role setting, task clarity, context, constraints, output format, and executability. Each dimension receives a score, and the final score is calculated as the average of all dimension scores.
+Prompt Optimizer then improves the original prompt based on the diagnosis. It adds missing components such as a role, clearer task structure, output format, and practical requirements.
