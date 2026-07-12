@@ -379,6 +379,57 @@ Marketing Plan 内容建议：
 - `docs: add final report draft`
 - `docs: update git contribution section`
 
+#### 当前状态（成员 D）
+
+- 已完成并放置于 `docs/`：
+  - `docs/project_background.md`
+  - `docs/user_personas.md`
+  - `docs/system_design.md`
+  - `docs/marketing_plan.md`
+  - `docs/git_contribution.md`
+  - `docs/final_report.md`
+  - `docs/pitch_outline.md`
+  - `docs/product_story.md`
+- 说明：
+  - `docs/` 为当前成员 D 正式交付物目录。
+  - `member_d_deliverables/` 作为最终打包交付目录，保留 PDF、DOCX、幻灯片源文件和发布资产清单。
+- 当前缺口：
+  - 需要从 `docs/final_report.md` 生成最终的 `final_report.pdf`；
+  - 需要补充 `docs/pitch_outline.md` 的演讲稿与幻灯片说明；
+  - 需要验证 `docs/system_design.md` 是否包含足够的模块说明与数据流图；
+  - 需要确认 `docs/marketing_plan.md` 是否与用户调研结果对齐并补充 KPI/推广节奏；
+  - 需要完善 `docs/git_contribution.md` 的实际仓库流程与发布策略说明。
+
+#### 分阶段实施方案
+
+1. `阶段 1：完成 Docs 正式交付`
+   - 校对并确认：
+     - `docs/project_background.md`
+     - `docs/product_story.md`
+     - `docs/user_personas.md`
+     - `docs/system_design.md`
+     - `docs/marketing_plan.md`
+     - `docs/git_contribution.md`
+     - `docs/pitch_outline.md`
+     - `docs/final_report.md`
+   - 输出：`docs/` 下所有成员 D 文档齐全、结构清晰、主题一致。
+
+2. `阶段 2：补充与落地`
+   - 生成最终报告 PDF：从 `docs/final_report.md` 导出 `docs/final_report.pdf`；
+   - 完善演讲材料：补充 `docs/pitch_outline.md` 的演讲稿、幻灯片说明与 Demo 流程；
+   - 补齐系统设计：补充 `docs/system_design.md` 的模块说明、数据流图或伪代码说明；
+   - 补齐营销计划：补充目标渠道、用户细分、KPI、商业模式与推广节奏。
+
+3. `阶段 3：打包与交付`
+   - 将最终产出按 `docs/` 正式文档整理到 `member_d_deliverables/` 打包目录；
+   - 更新 `member_d_deliverables/README.md` 和 `RELEASE_ASSETS.md`，说明 `docs/` 为正式文档源；
+   - 保留 `member_d_deliverables/` 的 PDF、演示源和资产清单，删除不必要的 Markdown 复制文件（如果需要避免重复）。
+
+4. `阶段 4：演练与提交`
+   - 准备 Pitch 讲稿与演练要点；
+   - 校对 Git 贡献说明，确保提交记录与分工一致；
+   - 提交最终变更并推送 GitHub。
+
 ### Pitch Talk 分工建议
 
 - 成员 A：介绍系统核心逻辑：输入 Prompt → 分析 → 评分 → 优化
