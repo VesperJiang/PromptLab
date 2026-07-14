@@ -186,6 +186,9 @@ with tab1:
             evaluation_result = score_prompt(user_prompt)
             total_score = evaluation_result["score"]
             metrics_dict = evaluation_result["dimension_scores"]
+            problems = evaluation_result.get("problems", diagnose_prompt(user_prompt))
+            optimized_prompt = optimize_prompt(user_prompt, problems)
+            optimization_notes = explain_optimization(problems)
 
             # 调整分栏比例为 [3, 2]：让 Overall 更宽、更突出，维度列表更精致紧凑
             col_score, col_progress = st.columns([3, 2])
@@ -216,6 +219,41 @@ with tab1:
                         st.markdown(f"<span class='dim-score'>{score_value} / 100</span>", unsafe_allow_html=True)
                     st.progress(score_value / 100)
                     st.markdown("<div style='margin-bottom: 0.6rem;'></div>", unsafe_allow_html=True)
+
+            st.markdown("---")
+            diag_col, opt_col = st.columns([2, 3])
+
+            with diag_col:
+                st.subheader("Diagnosis")
+                if problems:
+                    for problem in problems:
+                        st.warning(problem)
+                else:
+                    st.success("No major prompt problems detected.")
+
+                st.subheader("Optimization Notes")
+                for note in optimization_notes:
+                    st.write(f"- {note}")
+
+            with opt_col:
+                st.subheader("Optimized Prompt")
+                st.code(optimized_prompt, language="markdown")
+
+            history_data = {
+                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "original_prompt": user_prompt,
+                "score": total_score,
+                "optimized_prompt": optimized_prompt
+            }
+
+            try:
+                old_data = pd.read_csv("data/history.csv")
+                new_data = pd.concat([old_data, pd.DataFrame([history_data])], ignore_index=True)
+            except Exception:
+                new_data = pd.DataFrame([history_data])
+
+            new_data.to_csv("data/history.csv", index=False)
+            st.success("Prompt record saved to history.")
 
 # ==========================================
 # 6. Tab 2: Prompt Template Library
