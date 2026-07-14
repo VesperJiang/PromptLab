@@ -1,0 +1,37 @@
+time,original_prompt,score,optimized_prompt
+2026-07-14 17:20:05,Help me write about AI.,61,"You are an expert assistant with a clear role for this task.
+
+Original request:
+Help me write about AI.
+
+Instructions:
+1. Understand the user's real intention and complete the task clearly.
+2. Ask for missing background when needed, and state assumptions before answering.
+3. Return the answer in Markdown using headings, lists, or tables when useful.
+4. Explain key points step by step when helpful.
+5. Give practical examples when necessary.
+6. Follow explicit requirements, avoid unnecessary detail, and note any limits."
+2026-07-14 17:21:31,Git me some tips on IELTS speaking.,56,"You are an expert assistant with a clear role for this task.
+
+Original request:
+Git me some tips on IELTS speaking.
+
+Instructions:
+1. Restate the task briefly, then answer it in a direct and structured way.
+2. Ask for missing background when needed, and state assumptions before answering.
+3. Return the answer in Markdown using headings, lists, or tables when useful.
+4. Explain key points step by step when helpful.
+5. Give practical examples when necessary.
+6. Follow explicit requirements, avoid unnecessary detail, and note any limits."
+2026-07-14 17:32:57,Give me some tips on English studying.,56,"Act as a subject-matter specialist who can guide this task clearly.
+
+Original request:
+Give me some tips on English studying.
+
+Instructions:
+1. Clarify the user's goal first, then complete the task in a direct way.
+2. Ask for missing background when needed, and state assumptions before answering.
+3. Return the answer in Markdown using headings, lists, or tables when useful.
+4. Explain key points step by step when helpful.
+5. Give practical examples when necessary.
+6. Follow explicit requirements, avoid unnecessary detail, and note any limits."

@@ -33,16 +33,16 @@ def optimize_prompt(prompt: str, diagnosis: Optional[list] = None) -> str:
     if diagnosis is None:
         problems = diagnose_prompt(prompt)
 
-    role_instruction = "You are a professional AI assistant."
-    task_instruction = "Understand the user's real intention and complete the task clearly."
-    context_instruction = "Use the available context and clearly state any reasonable assumptions."
-    format_instruction = "Use Markdown format with clear sections or bullet points."
-    constraint_instruction = "Keep the answer concise, accurate, practical, and easy to understand."
+    role_instruction = "Act as a helpful specialist for this request."
+    task_instruction = "Turn the user's request into a clear, complete answer."
+    context_instruction = "Use the provided context. If key context is missing, state a reasonable assumption."
+    format_instruction = "Format the response in Markdown so it is easy to scan."
+    constraint_instruction = "Keep the response practical, focused, and easy to use."
 
     if _has_problem(problems, "role"):
-        role_instruction = "You are an expert assistant with a clear role for this task."
+        role_instruction = "Act as a subject-matter specialist who can guide this task clearly."
     if _has_problem(problems, "task") or _has_problem(problems, "not clear"):
-        task_instruction = "Restate the task briefly, then answer it in a direct and structured way."
+        task_instruction = "Clarify the user's goal first, then complete the task in a direct way."
     if _has_problem(problems, "context"):
         context_instruction = "Ask for missing background when needed, and state assumptions before answering."
     if _has_problem(problems, "output format"):

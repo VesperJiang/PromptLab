@@ -1,188 +1,219 @@
-import streamlit as st
-import pandas as pd
-import os
 from datetime import datetime
 
-# ==========================================
-# 0. Backend & Data Module Integration
-# ==========================================
+import pandas as pd
+import streamlit as st
+
 from src.prompt_analyzer import diagnose_prompt, score_prompt
-from src.prompt_optimizer import optimize_prompt, explain_optimization
+from src.prompt_optimizer import explain_optimization, optimize_prompt
 from src.prompt_templates import PROMPT_TEMPLATES
 
-# ==========================================
-# 1. Page Configuration
-# ==========================================
+
+HISTORY_PATH = "data/history.csv"
+
+
 st.set_page_config(
     page_title="PromptLab",
     layout="wide"
 )
 
-# ==========================================
-# 2. Premium Light-Theme CSS Injection
-# ==========================================
-st.markdown("""
+st.markdown(
+    """
     <style>
-        /* 1. 全局黑底白字 */
         .stApp {
-            background-color: #000000 !important;
-            color: #FFFFFF !important;
+            background: #f7f8fb;
+            color: #17202a;
         }
 
-        /* 2. 标题层级深色适配 */
+        .block-container {
+            max-width: 1180px;
+            padding-top: 2rem;
+            padding-bottom: 3rem;
+        }
+
         h1 {
-            color: #F5F5F5 !important;
-            font-weight: 800 !important;
-            font-size: 2.6rem !important;
-            margin-bottom: 0.2rem !important;
+            color: #111827;
+            font-size: 2.35rem !important;
+            font-weight: 760 !important;
+            letter-spacing: 0;
+            margin-bottom: 0.15rem !important;
         }
+
         h2, h3 {
-            color: #E0E0E0 !important;
-            font-weight: 600 !important;
-            margin-top: 1.5rem !important;
+            color: #1f2937;
+            font-weight: 680 !important;
+            letter-spacing: 0;
         }
 
-        /* Tab深色模式样式 */
-        .stTabs [data-baseweb="tab"] {
-            border: 1px solid #555555 !important;
-            background-color: #222222 !important;
-            padding: 0 !important;
-            border-radius: 4px !important;
-            margin: 0 4px !important;
-            overflow: hidden !important;
+        p, label, span, div {
+            letter-spacing: 0;
         }
-        .stTabs [data-baseweb="tab"] div[role="tab"] button,
-        .stTabs [data-baseweb="tab"] button {
-            color: #FFFFFF !important;
-            padding: 8px 16px !important;
-            background: transparent !important;
-            font-size: 1rem !important;
+
+        .app-subtitle {
+            color: #5b6472;
+            font-size: 1rem;
+            margin: 0 0 1.2rem 0;
         }
-        /* hover悬浮 */
-        .stTabs [data-baseweb="tab"]:hover div[role="tab"] button,
-        .stTabs [data-baseweb="tab"]:hover button {
-            color: #ff3333 !important;
+
+        .section-note {
+            color: #657080;
+            font-size: 0.95rem;
+            margin-top: -0.35rem;
+            margin-bottom: 1rem;
         }
-        .stTabs [data-baseweb="tab"]:hover {
-            border-color: #777777 !important;
-        }
-        /* 选中Tab */
-        .stTabs [data-baseweb="tab"][aria-selected="true"] {
-            background-color: #333333 !important;
-            border: 1px solid #777777 !important;
-        }
-        .stTabs [data-baseweb="tab"][aria-selected="true"] div[role="tab"] button,
-        .stTabs [data-baseweb="tab"][aria-selected="true"] button {
-            color: #66aaff !important;
-        }
+
         .stTabs [data-baseweb="tab-list"] {
-            gap: 6px !important;
-        }
-        .stTabs [data-baseweb="tab-highlight"] {
-            display: none !important;
+            gap: 0.45rem;
+            border-bottom: 1px solid #d9dee8;
         }
 
-        /* Metric指标深色适配 */
-        [data-testid="stMetricValue"] {
-            color: #F5F5F5 !important;
-            font-size: 4.4rem !important;
-            font-weight: 800 !important;
-            line-height: 1 !important;
-        }
-        [data-testid="stMetricDelta"] {
-            color: #ff6666 !important;
-            background-color: #2A1010 !important;
-            padding: 2px 8px !important;
-            border-radius: 4px !important;
-            font-size: 0.9rem !important;
-            font-weight: 600 !important;
+        .stTabs [data-baseweb="tab"] {
+            background: transparent;
+            border-radius: 0;
+            padding: 0.55rem 0.75rem;
         }
 
-        /* 进度条深色 */
-        .stProgress > div > div > div > div {
-            background-color: #66aaff !important;
-            height: 10px !important;
+        .stTabs [aria-selected="true"] {
+            border-bottom: 2px solid #2563eb;
+        }
+
+        .stTabs [data-baseweb="tab"] p {
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .stTabs [aria-selected="true"] p {
+            color: #1d4ed8;
+        }
+
+        textarea {
+            background: #ffffff !important;
+            color: #111827 !important;
+            border: 1px solid #ccd5e1 !important;
             border-radius: 8px !important;
         }
 
-        /* 维度文字深色 */
+        .stButton > button {
+            background: #2563eb;
+            color: #ffffff;
+            border: 0;
+            border-radius: 8px;
+            padding: 0.55rem 1rem;
+            font-weight: 650;
+        }
+
+        .stButton > button:hover {
+            background: #1d4ed8;
+            color: #ffffff;
+        }
+
+        [data-testid="stMetric"] {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        [data-testid="stMetricValue"] {
+            color: #111827;
+            font-size: 2.5rem !important;
+            font-weight: 780 !important;
+        }
+
+        [data-testid="stMetricDelta"] {
+            color: #64748b !important;
+            background: transparent !important;
+        }
+
+        .dim-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 0.45rem;
+            margin-bottom: 0.15rem;
+        }
+
         .dim-name {
-            color: #E0E0E0 !important;
-            font-weight: 600 !important;
-            font-size: 0.95rem !important;
+            color: #263241;
+            font-weight: 650;
+            font-size: 0.94rem;
         }
+
         .dim-score {
-            color: #BBBBBB !important;
-            font-size: 0.88rem !important;
+            color: #64748b;
+            font-size: 0.9rem;
         }
 
-        /* 输入框深色 */
-        textarea {
-            background-color: #1A1A1A !important;
-            color: #FFFFFF !important;
-            border: 1px solid #444444 !important;
-        }
-        .stButton>button {
-            background-color: #224488 !important;
-            color: #FFFFFF !important;
-            border: none !important;
-            border-radius: 4px !important;
-            font-weight: 500 !important;
-        }
-        .stButton>button:hover {
-            background-color: #112244 !important;
+        .stProgress > div > div > div > div {
+            background-color: #2563eb;
         }
 
-        /* 图片保持原有逻辑 */
-        .stImage>img {
-            object-fit: contain !important;
-            max-height: 340px !important;
-            width: auto !important;
+        code, pre {
+            border-radius: 8px !important;
+        }
+
+        .stImage img {
+            object-fit: contain;
+            max-height: 330px;
         }
     </style>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
-# ==========================================
-# 3. Header Section
-# ==========================================
-# 使用更大的自定义主标题以提高醒目度（CSS 已同步放大）
-st.markdown("<h1 style='margin:0 0 0.2rem 0;'>PromptLab: AI Prompt Engineering Studio</h1>", unsafe_allow_html=True)
-# 副标题使用稍微淡一些的灰色进行视觉降噪
-st.markdown("<p style='color: #4A4A4A; font-size: 1.05rem; margin-top: -0.5rem;'>An enterprise-grade web studio designed to diagnose, score, optimize, and manage system prompts.</p>", unsafe_allow_html=True)
-st.markdown("---")
 
-# ==========================================
-# 4. Core Navigation Layout
-# ==========================================
-tab1, tab2, tab3 = st.tabs([
-    "Prompt Analyzer", 
-    "Template Library", 
-    "Market Survey"
-])
+def save_history(original_prompt: str, score: int, optimized_prompt: str) -> None:
+    history_data = {
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "original_prompt": original_prompt,
+        "score": score,
+        "optimized_prompt": optimized_prompt
+    }
 
-# ==========================================
-# 5. Tab 1: Prompt Analyzer (评分与维度两列对齐优化)
-# ==========================================
-with tab1:
-    st.subheader("Input Your Raw Prompt")
-    st.markdown("<p style='color: #4A4A4A;'>Submit your unoptimized text below. Our diagnostic engine will evaluate its quality against structural engineering principles.</p>", unsafe_allow_html=True)
+    try:
+        old_data = pd.read_csv(HISTORY_PATH)
+        new_data = pd.concat([old_data, pd.DataFrame([history_data])], ignore_index=True)
+    except Exception:
+        new_data = pd.DataFrame([history_data])
+
+    new_data.to_csv(HISTORY_PATH, index=False)
+
+
+def read_history() -> pd.DataFrame:
+    try:
+        return pd.read_csv(HISTORY_PATH)
+    except Exception:
+        return pd.DataFrame(columns=["time", "original_prompt", "score", "optimized_prompt"])
+
+
+st.title("PromptLab")
+st.markdown(
+    "<p class='app-subtitle'>A focused workspace for diagnosing, improving, and reusing prompts.</p>",
+    unsafe_allow_html=True
+)
+
+tab_analyzer, tab_templates, tab_history = st.tabs(
+    ["Prompt Analyzer", "Template Library", "History"]
+)
+
+with tab_analyzer:
+    st.subheader("Analyze a Prompt")
+    st.markdown(
+        "<p class='section-note'>Paste a rough prompt below. PromptLab will score it, diagnose missing parts, and produce a cleaner version.</p>",
+        unsafe_allow_html=True
+    )
 
     user_prompt = st.text_area(
-        "Enter your prompt below to diagnose and optimize:",
-        height=180,
-        placeholder="Example: Help me write an article about AI..."
+        "Prompt",
+        height=170,
+        placeholder="Example: Help me write an article about AI."
     )
-    
+
     analyze_btn = st.button("Analyze and Optimize", type="primary")
-    
+
     if analyze_btn:
         if not user_prompt.strip():
-            st.warning("Boundary Check: Please enter a prompt first before initiating analysis.")
+            st.warning("Please enter a prompt first.")
         else:
-            st.success("Form submission captured successfully. Passing telemetry to the AI engine.")
-            st.markdown("---")
-            
-            # 调用后端核心函数
             evaluation_result = score_prompt(user_prompt)
             total_score = evaluation_result["score"]
             metrics_dict = evaluation_result["dimension_scores"]
@@ -190,40 +221,36 @@ with tab1:
             optimized_prompt = optimize_prompt(user_prompt, problems)
             optimization_notes = explain_optimization(problems)
 
-            # 调整分栏比例为 [3, 2]：让 Overall 更宽、更突出，维度列表更精致紧凑
-            col_score, col_progress = st.columns([3, 2])
+            score_col, metrics_col = st.columns([1, 1.35])
 
-            with col_score:
+            with score_col:
                 st.subheader("Overall Quality")
-                score_gap = total_score - 100
-                
-                # 使用 container 包裹，并留出 top margin 强行让主分数在视觉上与右侧进度条中轴对齐
-                st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
-                st.metric(
-                    label="Evaluation Score",
-                    value=f"{total_score} / 100",
-                    delta=f"{score_gap} pts below parity" if score_gap < 0 else "Optimal Quality"
-                )
-                st.markdown("<p style='color: #6C757D; font-size: 0.85rem; margin-top: 1rem;'>The metric above integrates overall semantic structures and syntactical criteria.</p>", unsafe_allow_html=True)
+                if total_score >= 85:
+                    score_note = "Strong prompt"
+                elif total_score >= 65:
+                    score_note = "Usable, with room to improve"
+                else:
+                    score_note = "Needs more structure"
+                st.metric("Score", f"{total_score}/100", score_note)
 
-            with col_progress:
+            with metrics_col:
                 st.subheader("Dimension Metrics")
-                st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
-                # 动态循环遍历维度并渲染（名称与分数采用更小、更紧凑的视觉风格）
                 for metric_name, score_value in metrics_dict.items():
-                    # 左右小排版，使得名称和具体分数呈现在一行
-                    prog_col_left, prog_col_right = st.columns([3, 1])
-                    with prog_col_left:
-                        st.markdown(f"<span class='dim-name'>{metric_name}</span>", unsafe_allow_html=True)
-                    with prog_col_right:
-                        st.markdown(f"<span class='dim-score'>{score_value} / 100</span>", unsafe_allow_html=True)
+                    st.markdown(
+                        f"""
+                        <div class="dim-row">
+                            <span class="dim-name">{metric_name}</span>
+                            <span class="dim-score">{score_value}/100</span>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
                     st.progress(score_value / 100)
-                    st.markdown("<div style='margin-bottom: 0.6rem;'></div>", unsafe_allow_html=True)
 
-            st.markdown("---")
-            diag_col, opt_col = st.columns([2, 3])
+            st.divider()
+            diagnosis_col, prompt_col = st.columns([1, 1.3])
 
-            with diag_col:
+            with diagnosis_col:
                 st.subheader("Diagnosis")
                 if problems:
                     for problem in problems:
@@ -231,116 +258,50 @@ with tab1:
                 else:
                     st.success("No major prompt problems detected.")
 
-                st.subheader("Optimization Notes")
+                st.subheader("What Changed")
                 for note in optimization_notes:
                     st.write(f"- {note}")
 
-            with opt_col:
+            with prompt_col:
                 st.subheader("Optimized Prompt")
                 st.code(optimized_prompt, language="markdown")
 
-            history_data = {
-                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "original_prompt": user_prompt,
-                "score": total_score,
-                "optimized_prompt": optimized_prompt
-            }
+            save_history(user_prompt, total_score, optimized_prompt)
+            st.success("Saved to history.")
 
-            try:
-                old_data = pd.read_csv("data/history.csv")
-                new_data = pd.concat([old_data, pd.DataFrame([history_data])], ignore_index=True)
-            except Exception:
-                new_data = pd.DataFrame([history_data])
+with tab_templates:
+    st.subheader("Prompt Template Library")
+    st.markdown(
+        "<p class='section-note'>Choose a category and reuse a structured prompt template.</p>",
+        unsafe_allow_html=True
+    )
 
-            new_data.to_csv("data/history.csv", index=False)
-            st.success("Prompt record saved to history.")
+    category_col, template_col = st.columns(2)
+    with category_col:
+        selected_category = st.selectbox("Category", list(PROMPT_TEMPLATES.keys()))
+    with template_col:
+        selected_template_name = st.selectbox(
+            "Template",
+            list(PROMPT_TEMPLATES[selected_category].keys())
+        )
 
-# ==========================================
-# 6. Tab 2: Prompt Template Library
-# ==========================================
-with tab2:
-    st.subheader("Enterprise Prompt Templates")
-    st.markdown("<p style='color: #4A4A4A;'>Browse and select verified, production-ready system prompt templates across multiple domains.</p>", unsafe_allow_html=True)
-    
-    # 垂直布局：将选择器与预览垂直堆叠，避免横向占用空间
-    with st.container():
-        categories = list(PROMPT_TEMPLATES.keys())
-        selected_category = st.selectbox("Select Template Category", categories)
+    final_template_text = PROMPT_TEMPLATES[selected_category][selected_template_name]
+    st.code(final_template_text.strip(), language="markdown")
 
-        available_templates = PROMPT_TEMPLATES[selected_category]
-        template_names = list(available_templates.keys())
-        selected_template_name = st.selectbox("Select Target Template", template_names)
+with tab_history:
+    st.subheader("Prompt History")
+    st.markdown(
+        "<p class='section-note'>Recent prompts saved from the analyzer workflow.</p>",
+        unsafe_allow_html=True
+    )
 
-        st.subheader("Template Content Preview")
-        final_template_text = available_templates[selected_template_name]
-        st.code(final_template_text.strip(), language="markdown")
-
-# ==========================================
-# 7. Tab 3: Market Survey Insights (容器与自适应排版优化)
-# ==========================================
-with tab3:
-    st.subheader("Market Survey & Analytical Insights")
-    st.markdown("<p style='color: #4A4A4A;'>Quantitative telemetry fetched from the team data infrastructure regarding prompt engineering pain points.</p>", unsafe_allow_html=True)
-    
-    image_base_path = "docs/images"
-    
-    # 将整个大屏包裹进一个最大宽度受限的中央容器中，防止宽屏下两边图片无限横向失真拉伸
-    with st.container():
-        st.markdown("<div style='max-width: 1100px; margin: 0 auto;'>", unsafe_allow_html=True)
-        
-        # 建立优雅的两列网格布局，严格控制列的宽度和缩放
-        grid_row1_col1, grid_row1_col2 = st.columns(2)
-        grid_row2_col1, grid_row2_col2 = st.columns(2)
-        
-        # 1. 渲染图1：AI使用频率 (饼图)
-        with grid_row1_col1:
-            st.markdown("<p style='color: #2D3136; font-weight: 600;'>1. AI Tool Usage Frequency</p>", unsafe_allow_html=True)
-            img1_path = os.path.join(image_base_path, "ai_usage.png")
-            if os.path.exists(img1_path):
-                # 调整第一张图宽度，使用CSS已设置的最大高度控制显示高度
-                st.image(img1_path, use_container_width=False, width=650)
-            else:
-                st.caption("Telemetry stream pending initialization.")
-
-        # 2. 渲染图2：写Prompt困难程度 (柱状图)
-        with grid_row1_col2:
-            st.markdown("<p style='color: #2D3136; font-weight: 600;'>2. Prompt Engineering Difficulty Distribution</p>", unsafe_allow_html=True)
-            img2_path = os.path.join(image_base_path, "difficulty.png")
-            if os.path.exists(img2_path):
-                st.image(img2_path, use_container_width=True)
-            else:
-                st.caption("Telemetry stream pending initialization.")
-
-        # 3. 渲染图3：用户痛点分布 (柱状图)
-        with grid_row2_col1:
-            st.markdown("<p style='color: #2D3136; font-weight: 600;'>3. Core User Pain Points Distribution</p>", unsafe_allow_html=True)
-            img3_path = os.path.join(image_base_path, "pain_points.png")
-            if os.path.exists(img3_path):
-                st.image(img3_path, use_container_width=True)
-            else:
-                st.caption("Telemetry stream pending initialization.")
-
-        # 4. 渲染图4：最想要的功能 (柱状图)
-        with grid_row2_col2:
-            st.markdown("<p style='color: #2D3136; font-weight: 600;'>4. High-Demand Feature Requirements</p>", unsafe_allow_html=True)
-            img4_path = os.path.join(image_base_path, "features.png")
-            if os.path.exists(img4_path):
-                st.image(img4_path, use_container_width=True)
-            else:
-                st.caption("Telemetry stream pending initialization.")
-
-        st.markdown("<hr style='border-top: 1px solid #E9ECEF;'>", unsafe_allow_html=True)
-        
-        # 5. 单独用居中或宽幅渲染图5：使用意愿 (饼图)
-        st.markdown("<p style='color: #2D3136; font-weight: 600;'>5. Target User Adoption Willingness for PromptLab</p>", unsafe_allow_html=True)
-        img5_path = os.path.join(image_base_path, "willingness.png")
-        if os.path.exists(img5_path):
-            # 将图5的展示宽度收紧，使其更加规整
-            st.image(img5_path, width=450)
-        else:
-            st.caption("Telemetry stream pending initialization.")
-            
-        st.markdown("</div>", unsafe_allow_html=True)
-        
-    st.markdown("---")
-    st.info("Analytical Conclusion: The visualization metrics above validate the substantial market viability and user demand for PromptLab automation tools.")
+    history_df = read_history()
+    if history_df.empty:
+        st.info("No prompt history yet.")
+    else:
+        history_df = history_df.sort_values("time", ascending=False)
+        st.dataframe(
+            history_df[["time", "score", "original_prompt", "optimized_prompt"]],
+            use_container_width=True,
+            hide_index=True
+        )
