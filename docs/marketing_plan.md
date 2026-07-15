@@ -1,67 +1,50 @@
 # Marketing Plan — PromptLab
 
-## 目标用户
-- 大学生：写作、学习、AI 课程辅助
-- AI 初学者：快速生成高质量 Prompt，降低使用门槛
-- 内容创作者：文案变体、脚本、社媒标题优化
-- 办公人员：PPT、邮件、会议纪要类 Prompt 模板
-- 企业团队：知识库、协作模板、标准化 Prompt 管理
+## 1. Target Users
+- College students: writing support, study assistance, and AI-related coursework help.
+- AI beginners: users who want a simple way to improve prompt quality without reading technical tutorials.
+- Content creators: short-video scripts, social media captions, title generation, and copywriting.
+- Office workers: email writing, meeting summaries, and report drafting.
+- Small teams and organizations: shared prompt libraries and collaboration workflows.
 
-## 核心卖点
-- Prompt 自动评分与优化建议，帮助用户快速迭代
-- 场景化模板库，覆盖写作、编程、营销、办公四类场景
-- 历史对比与版本管理，支持团队协作与持续改进
-- 可扩展为 Web、插件和企业私有版本，提高适用性
+## 2. Value Proposition
+PromptLab offers a practical and understandable solution to a common AI usability problem: weak prompts produce weak results. The product turns prompt writing from guesswork into a guided and measurable process. Its core value lies in helping users improve quality quickly, reuse successful patterns, and learn better prompting habits over time.
 
-## 市场定位
-- 现有工具多为“模板分享”或“生成即用”，缺少可视化评分与优化闭环
-- PromptLab 提供“评估+优化+复用”一体化体验，贴近用户实验需求
-- 目标定位为“AI Prompt 生产力助手”，适合教育、内容创作与企业内部推广
+## 3. Market Positioning
+The market already includes general AI tools and prompt-sharing websites, but many of them focus on output generation rather than prompt quality improvement. PromptLab distinguishes itself by combining evaluation, optimization, and reuse in one experience. It is especially suitable for education, personal productivity, content creation, and small-team collaboration.
 
-## 推广渠道
-- 校园推广：高校 AI/数据科学社团，组织 demo 讲座与在线体验
-- 内容营销：发布 5-6 篇案例分析和教程文章，分发到知乎/简书/公众号
-- 开源社区：在 GitHub 发布项目、提供演示代码、参与 AI 社区讨论
-- 社交媒体：小红书、B站短视频、微博热搜话题推广
-- 合作渠道：与 AI 培训机构、写作平台、教育平台洽谈集成试用
+## 4. Promotion Channels
+- Campus channels: university AI clubs, student communities, project demos, and course-based showcases.
+- Content platforms: short articles and tutorials on Zhihu, Bilibili, Xiaohongshu, and related communities.
+- Open-source and technical channels: GitHub project page, demo code, and community discussion.
+- Educational partnerships: collaboration with teachers, training institutions, and student innovation programs.
+- Word-of-mouth growth: invite early testers to share their results and compare before-and-after examples.
 
-## 推广节奏（12 周）
-- 周 1–2：上线预热，发布产品介绍、使用示例与核心价值点
-- 周 3–5：校园宣讲与用户调研，获取早期反馈
-- 周 6–8：内容营销与案例发布，展示实际提高效率的效果
-- 周 9–10：社群运营与渠道扩展，提升用户转化
-- 周 11–12：总结复盘、用户问卷、转化与二次推广
+## 5. Promotion Rhythm
+- Weeks 1–2: release a simple product introduction, demo video, and initial onboarding materials.
+- Weeks 3–5: gather early feedback from students and creators and refine the workflow.
+- Weeks 6–8: release example cases, tutorials, and community content to increase visibility.
+- Weeks 9–10: expand through social media and campus channels.
+- Weeks 11–12: evaluate user feedback, update a more complete growth plan, and prepare the next iteration.
 
-## KPI 目标
-- 注册/体验用户数：500+
-- 样本模板使用次数：2000+
-- 用户满意度：问卷平均分 ≥ 4.0/5
-- 留存率：7 天留存 ≥ 35%
-- 转化率（基础用户 → 高级功能）：3–5%
+## 6. KPI Goals
+- Reach 500+ user trials or demo visits.
+- Collect 200+ feedback entries or survey responses.
+- Achieve a satisfaction rating of at least 4.0/5 in follow-up surveys.
+- Maintain a meaningful repeat-use rate among early adopters.
 
-## 商业模式建议
-- 免费基础版：Prompt 评分与少量模板
-- 高级订阅：高级优化建议、自动保存、团队协作、模板分类管理
-- 企业版：私有部署、版本控制、权限管理、定制化 Prompt 库
-- 教育合作：高校团队优惠、课程项目支持、实验室部署方案
+## 7. Business Model Suggestions
+- Free basic version: prompt scoring and limited templates.
+- Premium version: more advanced optimization suggestions, personal history, richer templates, and collaboration support.
+- Team or enterprise version: shared prompt library, permission management, and private deployment options.
 
-## 预算与资源分配
-- 校园活动与材料：$500
-- 内容制作与推广：$800
-- 社交媒体广告与社群运营：$300
-- 工具与平台费用：$400
-- 预留应急费用：$500
+## 8. Alignment with Survey Insights
+The promotion plan should remain closely aligned with the project’s survey findings. The strongest user needs appear to be clear prompt guidance, low learning barriers, template reuse, and practical help in everyday AI tasks. These insights support a simple and approachable product positioning rather than a highly technical one.
 
-## 用户转化路径
-1. 免费注册 → 体验 Prompt 评分与一次免费优化
-2. 体验满意 → 解锁更多场景模板与高级优化建议
-3. 团队协作需求 → 订阅高级协作版或企业版
-4. 教育/机构合作 → 提供课程与实验室试用优惠
-
-## 跟踪与反馈
-- 产品内嵌反馈入口，采集使用场景与满意度
-- 定期分析 `data/survey_results.csv` 与用户调研结果
-- 通过问卷、Discord/微信群和邮件收集用户建议，快速迭代
-- 结合使用数据评估推广渠道效果，优化后续投放策略
+## 9. Feedback and Iteration
+- Add an easy feedback entry to the app.
+- Review survey and usage data regularly.
+- Adjust messaging and templates based on the most frequent user scenarios.
+- Prioritize features that reduce friction and improve prompt quality in real use.
 
 

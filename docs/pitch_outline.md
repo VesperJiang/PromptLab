@@ -1,44 +1,53 @@
 # Pitch Outline — PromptLab
 
-## 1. 封面
-- 项目名：PromptLab
-- 团队/成员：Member D
-- 联系方式：jingxuan@example.com
+## 1. Presentation Goal
+This pitch is designed as a concise product presentation for a class or project review. The core message is that PromptLab helps users turn vague prompts into clearer, more reliable instructions by combining diagnosis, scoring, optimization, and versioning in a single workflow.
 
-## 2. 问题陈述
-- 用户不会写高质量 Prompt，导致 AI 输出不可控和低效
-- 无法量化 Prompt 质量，也缺乏版本对比机制
+## 2. Opening Hook
+- Start with a common pain point: many users know how to use AI tools, but they do not know how to write prompts that produce consistent and useful output.
+- Introduce PromptLab as a lightweight assistant for improving prompt quality without requiring deep technical knowledge.
 
-## 3. 解决方案
-- 提供 Prompt 评分、诊断、自动优化与模板库
-- 历史版本与 A/B 对比，支持团队共享
+## 3. Problem Statement
+- Users often write prompts that are too vague or incomplete.
+- The quality of AI responses is hard to evaluate without a structured method.
+- There is also no simple way to compare prompt versions or save successful patterns for future reuse.
 
-## 4. 产品演示流程（Demo 脚本）
-1. 输入原始 Prompt
-2. 展示评分与分项指标
-3. 生成优化候选并展示改进点
-4. 保存版本并对比结果
+## 4. Solution Summary
+- PromptLab offers prompt diagnosis, prompt scoring, automatic optimization, and a template library.
+- It helps users understand why a prompt is weak and how it can be improved.
+- The product also supports prompt history and comparison, which is useful for both individual users and teams.
 
-## 5. 市场与用户
-- 目标用户：学生、内容创作者、企业团队
-- 市场机会与差异化（见 `docs/marketing_plan.md`）
+## 5. Demo Flow
+1. Enter an original prompt that is weak or underspecified.
+2. Show the diagnostic report and scoring breakdown.
+3. Display the optimized version and explain the main improvement points.
+4. Save or compare the version history to demonstrate iterative improvement.
 
-## 6. 商业模式
-- 免费 + 高级订阅（高级模板库、API 额度、团队版）
+## 6. Slide Structure
+- Slide 1: Project title and team introduction
+- Slide 2: The problem of poor prompt quality
+- Slide 3: Product concept and core value
+- Slide 4: Main features and workflow
+- Slide 5: Demo snapshot of diagnosis and scoring
+- Slide 6: Demo snapshot of prompt optimization
+- Slide 7: User value and target audience
+- Slide 8: Market opportunity and business model
+- Slide 9: Roadmap and future development
+- Slide 10: Team roles and closing message
 
-## 7. 路线图
-- 0–4 周：MVP（评分 + 单次优化 + 模板库）
-- 4–8 周：A/B 测试面板 + 团队权限
-- 8–12 周：市场推广与教育合作
+## 7. Speaker Notes
+- Emphasize that the current version is a lightweight prototype rather than a full commercial product.
+- Focus on the practical value: lower trial-and-error cost, better prompt quality, and better reuse of successful prompting patterns.
+- Mention that the system is designed to be easy to understand and accessible for beginners.
 
-## 8. 团队与分工
-- 成员 D：产品、报告、市场、演示
-- 开发：`src/` 模块实现与 API
+## 8. Q&A Preparation
+- Why is this different from normal AI chat tools?
+- Why is prompt evaluation useful for users?
+- What is the next step for turning this prototype into a product?
+- How can this be extended to education, creators, or enterprise teams?
 
-## 9. 要求与下一步
-- Demo 机器准备（Streamlit 运行环境）
-- 收集早期用户反馈并量化指标
-
-## 10. 幻灯片建议页数及内容
-- 10–12 张幻灯片：封面、问题、解决方案、演示（2 页）、市场、商业模式、路线图、团队、结尾/联系方式
+## 9. Delivery Tips
+- Keep the talk concise and practical.
+- Show one or two strong before-and-after examples.
+- End with a clear message: PromptLab can help users write better prompts and get more reliable AI results.
 
