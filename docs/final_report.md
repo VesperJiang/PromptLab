@@ -1,50 +1,57 @@
 # Final Report — PromptLab
 
-## 摘要
-PromptLab 提供一套面向普通用户与专业使用者的 Prompt 分析、评分、优化与管理工具。本报告总结了项目目标、方法、初步实现、用户调研结果、示例案例与下一步计划。
+## Abstract
+PromptLab is a lightweight prompt engineering toolkit designed to help users analyze, evaluate, improve, and manage prompts for large language models. The project addresses a common challenge in everyday AI use: many users know how to ask questions, but they do not always know how to build clear, structured, and high-quality prompts. This report summarizes the project goal, the implementation approach, the core functions, the evaluation results, and the future development direction.
 
-## 1. 项目目标
-- 帮助用户书写更高质量的 Prompt，降低试错成本
-- 提供可量化的评分体系与历史版本管理
-- 支持模板库与团队协作，便于知识复用
+## 1. Project Objective
+- Help users write higher-quality prompts with less trial and error.
+- Provide a simple and explainable scoring system for prompt quality.
+- Support prompt optimization, template reuse, and version history management.
+- Encourage better prompt engineering habits among students, creators, and professionals.
 
-## 2. 方法与实现概述
-- 前端：基于 `streamlit` 的交互界面（`app.py`）。
-- 后端核心逻辑：`src/prompt_analyzer.py`（评分）、`src/prompt_optimizer.py`（优化）、`src/prompt_templates.py`（模板管理）。
-- 数据：使用 CSV 与 SQLite 记录 Prompt 历史、评估结果与用户反馈（`data/`）。
-- 流程：用户提交 Prompt → 得到评分与诊断 → 生成优化候选 → 保存版本并比较得分。
+## 2. Method and Implementation Overview
+- Frontend: a Streamlit-based interactive interface implemented in app.py.
+- Backend logic: prompt analysis and scoring are handled in src/prompt_analyzer.py, while prompt optimization is implemented in src/prompt_optimizer.py and prompt templates are organized in src/prompt_templates.py.
+- Data storage: CSV and SQLite are used to store prompt history, evaluation results, and basic user feedback.
+- Workflow: the user submits a prompt, receives diagnosis and scoring information, obtains an improved version, and can compare the results with earlier versions.
 
-## 3. 用户调研（摘要）
-- 数据来源：`data/survey_results.csv`（初步问卷）
-- 主要发现：用户普遍缺乏 Prompt 写作技巧，希望获得可复制模板与可解释的优化建议；学生与内容创作者对节省时间的诉求最强。
+## 3. User Research Summary
+- Data source: data/survey_results.csv and related project evaluation materials.
+- Main findings: many users frequently use AI tools but still struggle to write prompts that produce consistent and useful outputs. There is strong demand for reusable templates and clearer guidance on how to improve prompts.
 
-## 4. 核心功能与示例
-- Prompt 评分：结合启发式规则与 LLM 评估给出分数与分项指标（清晰度、具体性、约束完整性等）。
-- 自动优化：生成多候选并返回改进说明与分数差值。
-- 模板库：按场景标签归档（写作、摘要、代码生成、营销文案）。
+## 4. Core Functions and Example
+- Prompt scoring: the system evaluates prompt quality across dimensions such as clarity, completeness, context, constraints, and output format.
+- Automated optimization: the system generates improved prompts and explains the main changes.
+- Template library: prompts are grouped by typical use cases such as writing, summarization, coding, and office tasks.
 
-### 示例案例
-- 输入 Prompt："帮我写一封产品发布的营销邮件。"
-- 输出：评分 62/100，优化后评分 82/100，优化要点包含：明确受众、加入 CTA、规定长度与语气。
+### Example Case
+- Input prompt: “Help me write a marketing email for a product launch.”
+- Output: the system returns a structured score and an optimized prompt that includes clearer audience definition, stronger instructions, and more explicit formatting requirements.
 
-## 5. 评估与结果（初步）
-- 指标示例：平均评分提升 15-25%，优化后用户满意度提升（基于小规模测试）
-- 资源成本：每次优化视模型与参数不同，平均 token 成本需进一步量化
+## 5. Evaluation and Preliminary Results
+- The project was tested through a small set of representative prompts and a limited survey dataset.
+- The optimized prompts were generally more complete and easier to follow than the original versions.
+- The preliminary results suggest that a lightweight prompt analysis and optimization workflow can be useful for beginners and casual users.
 
-## 6. 局限与风险
-- 当前评分大量依赖 LLM 的主观评价，需引入更多可量化的 A/B 测试
-- 隐私与密钥管理：需确保 API keys 不在仓库中泄露
+## 6. Limitations and Risks
+- The current system is a lightweight rule-based prototype rather than a fully integrated production system with a real LLM API.
+- The scoring method is heuristic and may not capture all subtle differences in prompt quality.
+- The evaluation sample is small, so the conclusions should be treated as preliminary rather than definitive.
 
-## 7. 未来工作（优先级）
-1. 完整实现并测试 `score_prompt` 与 `optimize_prompt`，编写单元与集成测试（优先）
-2. 扩展模板库并完成团队共享/权限设计
-3. 构建 A/B 测试面板并量化评估指标
-4. 准备最终 PDF 报告与 Pitch 幻灯片（`docs/pitch_outline.md` + `slides/`）
+## 7. Future Work
+1. Integrate real model APIs and test them in practice.
+2. Expand the template library and improve collaboration features.
+3. Add stronger evaluation metrics and more systematic A/B testing.
+4. Prepare the final PDF report and presentation materials.
 
-## 8. 交付物清单（本次交付）
-- `docs/project_background.md`、`docs/user_personas.md`、`docs/system_design.md`、`docs/marketing_plan.md`、`docs/git_contribution.md`、`docs/final_report.md`
-- 数据：`data/survey_results.csv`、`data/history.csv`
+## 8. Deliverables
+- docs/project_background.md
+- docs/user_personas.md
+- docs/system_design.md
+- docs/marketing_plan.md
+- docs/git_contribution.md
+- docs/final_report.md
+- data/survey_results.csv and data/history.csv
 
-## 附录：生成与分发说明
-
-有关如何从 Markdown 生成 PDF（例如使用 Pandoc / Quarto）以及将最终报告放置到 `member_d_deliverables/` 目录的具体步骤，请参阅 `/member_d_deliverables/README.md`。
+## Appendix: Generation and Distribution Notes
+The final report can be generated from the Quarto source file using Quarto and rendered to PDF where a TeX engine is available. The related documentation and release materials are organized under the docs and member_d_deliverables folders for submission and distribution. This package is intended to support a formal assignment submission with both source materials and a structured report trail.

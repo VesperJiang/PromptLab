@@ -1,15 +1,23 @@
-# Member D Deliverables for PromptLab.
+# Member D Deliverables for PromptLab
 
-To generate the PDF report locally (requires `pandoc` and a LaTeX engine such as `xelatex`):
+This folder contains the final submission package for the project. The core report source is maintained in the main repository under report.qmd and the supporting documentation is organized in the docs directory.
+
+## Contents
+- Final report source and supporting documentation
+- Release notes and asset summary
+- Presentation-ready materials for submission
+
+## Local PDF Generation
+To generate a PDF locally, a working TeX environment is required. One common setup is:
 
 ```bash
-# Install pandoc (macOS with Homebrew):
+# macOS example
 brew install pandoc
-# Install a TeX distribution if needed (MacTeX recommended):
+# Install MacTeX or another LaTeX distribution
 # https://www.tug.org/mactex/
-
-# Convert markdown to PDF:
-pandoc docs/final_report.md -o member_d_deliverables/final_report.pdf --pdf-engine=xelatex
 ```
 
-If you'd like, I can attempt alternative PDF generation methods here, but they may require additional system packages. If you want me to proceed, confirm and I'll try creating a simple PDF fallback.
+If a TeX engine is available, the report can then be rendered from the Quarto source file using Quarto.
+
+## Submission Notes
+This package is intended to support a formal assignment submission with a complete report narrative, supporting documentation, and a clear development history.
