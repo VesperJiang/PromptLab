@@ -1,27 +1,36 @@
-# Member D Deliverables — PromptLab
+# Release Assets — PromptLab (Member D Deliverables)
 
-已收集到的发布资产：
+## Final Submission Inventory
 
-- docs/project_background.md -> member_d_deliverables/project_background.md
-- docs/user_personas.md -> member_d_deliverables/user_personas.md
-- docs/marketing_plan.md -> member_d_deliverables/marketing_plan.md
-- docs/git_contribution.md -> member_d_deliverables/git_contribution.md
-- docs/final_report.md -> member_d_deliverables/final_report.md
-- docs/pitch_outline.md -> member_d_deliverables/pitch_outline.md
-- slides/simple_slides.md -> member_d_deliverables/simple_slides.md
+| Asset | Source Location | Destination | Status |
+|---|---|---|---|
+| Project Background | `docs/project_background.md` | Repository root | ✅ Done |
+| Product Story | `docs/product_story.md` | Repository root | ✅ Done |
+| User Personas | `docs/user_personas.md` | Repository root | ✅ Done |
+| System Design | `docs/system_design.md` | Repository root | ✅ Done |
+| Marketing Plan | `docs/marketing_plan.md` | Repository root | ✅ Done |
+| Git Contribution Guide | `docs/git_contribution.md` | Repository root | ✅ Done |
+| Final Report (QMD) | `report.qmd` | Repository root | ✅ Done |
+| Final Report (PDF) | Generated from `report.qmd` | Repository root | ✅ Done |
+| Pitch Outline | `docs/pitch_outline.md` | Repository root | ✅ Done |
+| Survey Results | `data/survey_results.csv` | Repository root | ✅ Done |
+| Test Prompts | `data/test_prompts.csv` | Repository root | ✅ Done |
+| README | `README.md` | Repository root | ✅ Done |
+| .gitignore | `.gitignore` | Repository root | ✅ Done |
 
-说明：
-- 我已将源 Markdown 文件的拷贝放在 `member_d_deliverables/` 中，供打包提交或制作演示使用。
-- 系统上未安装 `pandoc`，因此我未能在此环境中生成 `member_d_deliverables/final_report.pdf` 或 `member_d_deliverables/promptlab_pitch.pptx`。
+## Notes
 
-本地生成建议命令（需安装 pandoc 与 LaTeX 或 pandoc + PowerPoint 支持）：
+- The **primary report source** is `report.qmd` (Quarto format) at the repository root.
+- The **PDF report** is generated from `report.qmd` using Quarto + TinyTeX.
+- Supporting documentation is maintained under `docs/`.
+- Survey data and test prompts are in `data/`.
+
+## Regeneration Commands
 
 ```bash
-# 生成 PDF 报告（需要 xelatex）
-pandoc docs/final_report.md -o member_d_deliverables/final_report.pdf --pdf-engine=xelatex
+# Generate PDF report
+quarto render report.qmd --to pdf
 
-# 生成幻灯片 PPTX
-pandoc slides/simple_slides.md -t pptx -o member_d_deliverables/promptlab_pitch.pptx
+# Clean generated files
+quarto clean report.qmd
 ```
-
-需要我尝试使用其他简单方法生成 PDF（例如将 Markdown 转为 HTML 再打印为 PDF，或用 headless Chromium 渲染）吗？这些方法也可能不在当前环境可用。

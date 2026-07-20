@@ -1,23 +1,50 @@
 # Member D Deliverables for PromptLab
 
-This folder contains the final submission package for the project. The core report source is maintained in the main repository under report.qmd and the supporting documentation is organized in the docs directory.
+This folder contains the final submission package for the project.
+
+## Source of Truth
+
+The **primary report source** is maintained at the repository root:
+- **`report.qmd`**: Quarto source file for the final PDF report (root directory)
+- **`README.md`**: Project description, team info, and submission links (root directory)
+- **`docs/`**: Supporting documentation (project background, user personas, system design, marketing plan, git contribution, pitch outline)
+
+This `member_d_deliverables/` directory is a **packaged copy** for submission convenience.
 
 ## Contents
-- Final report source and supporting documentation
-- Release notes and asset summary
-- Presentation-ready materials for submission
 
-## Local PDF Generation
-To generate a PDF locally, a working TeX environment is required. One common setup is:
+| File | Description |
+|---|---|
+| `README.md` | This file — deliverables overview |
+| `RELEASE_ASSETS.md` | Asset inventory and generation notes |
+| `final_report.md` | Report markdown source (copy from docs/) |
+
+## Related Files (in Repository Root)
+
+| File | Description |
+|---|---|
+| `report.qmd` | **Quarto source** for generating final_report.pdf |
+| `final_report.pdf` | **Generated PDF** of the final report |
+| `references.bib` | BibTeX references |
+| `.gitignore` | Git ignore rules |
+
+## Quick Links for Submission
+
+- **GitHub Repository**: [https://github.com/VesperJiang/PromptLab](https://github.com/VesperJiang/PromptLab)
+- **Report QMD Source**: [`report.qmd`](../report.qmd)
+- **Final Report PDF**: [`final_report.pdf`](../final_report.pdf)
+- **README**: [`README.md`](../README.md)
+
+## PDF Generation (if regenerating)
 
 ```bash
-# macOS example
-brew install pandoc
-# Install MacTeX or another LaTeX distribution
-# https://www.tug.org/mactex/
+# Requires Quarto + TinyTeX installed
+quarto install tinytex   # One-time setup
+quarto render report.qmd --to pdf
 ```
 
-If a TeX engine is available, the report can then be rendered from the Quarto source file using Quarto.
-
 ## Submission Notes
-This package is intended to support a formal assignment submission with a complete report narrative, supporting documentation, and a clear development history.
+
+This package supports the SUM26001 final project submission.  
+Submitted to: [https://classproject-iss-bfsu.azurewebsites.net/report/](https://classproject-iss-bfsu.azurewebsites.net/report/)  
+Also submitted to BSFU Blackboard.
