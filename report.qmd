@@ -3,7 +3,7 @@ title: "PromptLab: AI Prompt Engineering Studio"
 author: 
   - "姜姗 (Jiang Shan) — 202420119007"
   - "杨琦彧 (Yang Qiyu) — 202420119020"
-  - "Member C (Name TBD)"
+  - "吕明雪 (Lyu Mingxue) — 202420102070"
   - "刘璟暄 (Liu Jingxuan) — 202520105002"
 institute: "Beijing Foreign Studies University — International Summer School"
 date: last-modified
@@ -266,7 +266,7 @@ This section documents the key bottlenecks we encountered during the project, fo
 |---|---|---|---|---|---|
 | A | 姜姗 (Jiang Shan) | 202420119007 | 信息科学技术学院 | Technical Lead / Backend | Prompt analysis, scoring, and optimization logic |
 | B | 杨琦彧 (Yang Qiyu) | 202420119020 | 信息科学技术学院 | Frontend / Demo Lead | Streamlit interface and live demonstration |
-| C | (TBD) | (TBD) | (TBD) | Data & Evaluation Lead | Surveys, prompt testing, and evaluation analysis |
+| C | 吕明雪 (Lyu Mingxue) | 202420102070 | 国际商学院 | Data & Evaluation Lead | Surveys, prompt testing, and evaluation analysis |
 | D | 刘璟暄 (Liu Jingxuan) | 202520105002 | 法语语言文化学院 | Product & Report Lead | Documentation, final report, marketing, and integration |
 
 ## Collaboration Workflow
@@ -289,11 +289,11 @@ The following commits illustrate the collaborative nature of the project:
 - `feat: add prompt input form` --- 杨琦彧 (B)
 - `feat: add score visualization` --- 杨琦彧 (B)
 - `style: improve layout` --- 杨琦彧 (B)
-- `docs: add survey questions` --- Member C
-- `data: add survey results` --- Member C
-- `analysis: add survey charts` --- Member C
-- `eval: add prompt test cases` --- Member C
-- `eval: compare before and after optimization` --- Member C
+- `docs: add survey questions` --- 吕明雪 (C)
+- `data: add survey results` --- 吕明雪 (C)
+- `analysis: add survey charts` --- 吕明雪 (C)
+- `eval: add prompt test cases` --- 吕明雪 (C)
+- `eval: compare before and after optimization` --- 吕明雪 (C)
 - `docs: add project introduction` --- 刘璟暄 (D)
 - `docs: add product story` --- 刘璟暄 (D)
 - `docs: add marketing plan` --- 刘璟暄 (D)

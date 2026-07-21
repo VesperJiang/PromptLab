@@ -58,7 +58,7 @@ Throughout this project, we encountered several key challenges that taught us im
 |---|---|---|---|---|---|
 | A | 姜姗 (Jiang Shan) | 202420119007 | 信息科学技术学院 | Technical Lead / Backend | Prompt analysis, scoring, and optimization logic |
 | B | 杨琦彧 (Yang Qiyu) | 202420119020 | 信息科学技术学院 | Frontend / Demo Lead | Streamlit interface and live demonstration |
-| C | (TBD) | (TBD) | (TBD) | Data & Evaluation Lead | Surveys, prompt testing, and evaluation analysis |
+| C | 吕明雪 (Lyu Mingxue) | 202420102070 | 国际商学院 | Data & Evaluation Lead | Surveys, prompt testing, and evaluation analysis |
 | D | 刘璟暄 (Liu Jingxuan) | 202520105002 | 法语语言文化学院 | Product & Report Lead | Documentation, final report, marketing, and integration |
 
 ## Repository Contents
