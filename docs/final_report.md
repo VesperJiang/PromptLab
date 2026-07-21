@@ -1,7 +1,9 @@
 # Final Report — PromptLab
 
+> **Note**: This is a reference copy. The authoritative report source is `report.qmd` (Quarto format) at the repository root. The generated PDF is `final_report.pdf`.
+
 ## Abstract
-PromptLab is a lightweight prompt engineering toolkit designed to help users analyze, evaluate, improve, and manage prompts for large language models. The project addresses a common challenge in everyday AI use: many users know how to ask questions, but they do not always know how to build clear, structured, and high-quality prompts. This report summarizes the project goal, the implementation approach, the core functions, the evaluation results, and the future development direction.
+PromptLab is a lightweight prompt engineering toolkit designed to help users analyze, evaluate, improve, and manage prompts for large language models. The project addresses a common challenge in everyday AI use: many users know how to ask questions, but they do not always know how to build clear, structured, and high-quality prompts. This report summarizes the project goal, the implementation approach, the core functions, the evaluation results, and the key bottlenecks encountered during development.
 
 ## 1. Project Objective
 - Help users write higher-quality prompts with less trial and error.

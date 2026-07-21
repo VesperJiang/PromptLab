@@ -6,7 +6,16 @@ author:
   - "吕明雪 (Lyu Mingxue) — 202420102070"
   - "刘璟暄 (Liu Jingxuan) — 202520105002"
 institute: "Beijing Foreign Studies University — International Summer School"
-date: last-modified
+date: "July 2026"
+lang: en
+abstract: |
+  PromptLab is a lightweight prompt engineering toolkit that helps users 
+  diagnose, score, optimize, and manage prompts for large language models. 
+  Based on a survey of 30 users and tests with 10 representative prompts, 
+  this report documents the project's motivation, system design, evaluation 
+  results, and the key bottlenecks encountered during development. The 
+  project demonstrates that even a rule-based approach to prompt analysis 
+  can deliver meaningful improvements in prompt quality and usability.
 format:
   pdf:
     toc: true
@@ -22,6 +31,15 @@ bibliography: references.bib
 ---
 
 # Introduction
+
+## Course and Submission Information
+
+- **Course**: SUM26001 — International Summer School
+- **University**: Beijing Foreign Studies University (BFSU)
+- **Submission Date**: July 2026
+- **GitHub Repository**: [https://github.com/VesperJiang/PromptLab](https://github.com/VesperJiang/PromptLab)
+- **Report Source**: `report.qmd` (Quarto format)
+- **Report PDF**: `final_report.pdf`
 
 ## Project Summary
 
@@ -52,16 +70,26 @@ PromptLab addresses these issues by providing a lightweight but practical workfl
 
 The system follows a modular architecture with clear separation of concerns:
 
-```mermaid
-flowchart LR
-  User[User] --> UI[Streamlit UI / app.py]
-  UI --> Analyzer[Prompt Analyzer<br/>src/prompt_analyzer.py]
-  UI --> Optimizer[Prompt Optimizer<br/>src/prompt_optimizer.py]
-  UI --> Templates[Template Library<br/>src/prompt_templates.py]
-  Analyzer --> Storage[(SQLite / CSV)]
-  Optimizer --> Storage
-  Templates --> Storage
-  Storage --> Report[Evaluation & History]
+```
+ ┌──────────┐
+ │   User   │
+ └────┬─────┘
+      │
+ ┌────▼──────────┐
+ │ Streamlit UI  │
+ │   (app.py)    │
+ └──┬────┬────┬──┘
+    │    │    │
+ ┌──▼──┐┌▼───┐┌▼────────┐
+ │Prompt││Opti││Template │
+ │Analyz││mizer││Library  │
+ │ .py  ││.py  ││ .py     │
+ └──┬───┘└┬───┘└──┬──────┘
+    │     │       │
+ ┌──▼─────▼───────▼──┐
+ │  SQLite / CSV     │
+ │  (Storage)        │
+ └────────────────────┘
 ```
 
 ## Core Components
@@ -338,5 +366,18 @@ PromptLab demonstrates a practical and accessible approach to helping users impr
 ## Final Remarks
 
 Prompt engineering is an increasingly important skill in the age of generative AI. Tools like PromptLab can help bridge the gap between novice users and effective AI usage by making prompt quality measurable, improvable, and reusable. This project has demonstrated that even a lightweight, rule-based approach can deliver meaningful improvements to prompt quality, and it provides a strong foundation for future development toward a more powerful and fully integrated prompt engineering assistant.
+
+# Appendix: Survey Questions
+
+The following questions were used in the user survey (distributed via Wenjuanxing, 30 respondents):
+
+1. Do you frequently use AI tools? (e.g., ChatGPT, DeepSeek, Kimi, Doubao)
+2. What are your main use scenarios for AI tools? (Multiple choice)
+3. Do you find it difficult to write prompts?
+4. What problems have you encountered when using AI? (Multiple choice)
+5. If a tool could diagnose and optimize your prompts, what features would you want? (Multiple choice)
+6. Would you be willing to try a tool like PromptLab?
+
+Full survey results are available at `data/survey_results.csv`.
 
 # References
